@@ -14,7 +14,7 @@
 
 from collections import deque
 
-words = deque('0123456789abcdef')
+words = deque('0123456789ABCDEF')
 
 def from16to10(string):
     global words
