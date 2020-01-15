@@ -8,3 +8,48 @@
 # Поэтому использование встроенных функций для перевода из одной системы счисления в другую в данной задаче под запретом.
 #
 # Вспомните начальную школу и попробуйте написать сложение и умножение в столбик.
+
+
+
+
+from collections import deque
+
+words = deque('0123456789abcdef')
+
+def from16to10(string):
+    global words
+    d = deque(string)
+    d.reverse()
+    s = 0
+    item = 0
+    for i in d:
+        s += words.index(i)*(16**item)
+        item += 1
+    return s
+
+
+def from10to16(s):
+    global words
+    lit = ''
+    item = 0
+    while s > 0:
+        lit += words[s % 16]
+        s = s // 16
+    lit = deque(lit)
+    lit.reverse()
+    return lit
+
+
+inp1 = input("Введите шестнадцатричное число 1")
+inp2 = input("Введите шестнадцатричное число 2")
+
+print(f'Введено шестнадцатричное число {list(inp1)}')
+print(f'Введено шестнадцатричное число {list(inp2)}')
+
+inp1 = from16to10(inp1)
+inp2 = from16to10(inp2)
+
+res = inp1 + inp2
+print(f'Результат сложения {from10to16(res)}')
+res = inp1 * inp2
+print(f'Результат умножения {from10to16(res)}')
